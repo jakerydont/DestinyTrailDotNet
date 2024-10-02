@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 using System.Collections.Generic;
+using System.IO.Pipes;
 
 namespace DestinyTrailDotNet
 {
@@ -15,22 +16,29 @@ namespace DestinyTrailDotNet
             "Fiona", "George", "Hannah", "Isaac", "Julia", 
             "Kevin", "Laura", "Michael", "Nina", "Oliver",
             "Paula", "Quentin", "Rachel", "Sam", "Tina",
-            "Ulysses", "Victor", "Wendy", "Xander", "Yvonne", "Zach"
+            "Ulysses", "Victor", "Wendy", "Xander", "Yvonne", "Zeke"
         };
+
+ 
 
         static async Task Main(string[] args)
         {
-        
-            string statusesFilePath = "Statuses.yaml"; // Path to the new statuses file
+              
+            int milesTraveled = 0;
 
-          
-            // Load statuses from the YAML file using the generic method
+            string occurrencesFilePath = "Occurrences.yaml"; // Update this path as needed
+            string statusesFilePath = "Statuses.yaml"; // Path to the new statuses file
+            string pacesFilePath = "Paces.yaml"; // Path to the new paces file
+
+
             string[] statuses = LoadYaml<StatusData>(statusesFilePath).Statuses.ToArray();
 
 
-
-            string occurrencesFilePath = "Occurrences.yaml"; 
             OccurrenceEngine occurrenceEngine = new OccurrenceEngine(occurrencesFilePath,  RandomNames, statuses);
+
+            // Load paces from the YAML file
+            PaceData paceData = LoadYaml<PaceData>(pacesFilePath);
+            var pace = paceData.Paces.First(pace => pace.Name == "grueling");
 
 
             // Start with an initial date
@@ -39,6 +47,8 @@ namespace DestinyTrailDotNet
             // Loop to pick a new random occurrence every 5 seconds
             while (true)
             {
+
+
                 // Pick a random occurrence based on probability
                 Occurrence randomOccurrence = occurrenceEngine.PickRandomOccurrence();
                 var occurrence = occurrenceEngine.ProcessOccurrence(randomOccurrence);
@@ -46,6 +56,12 @@ namespace DestinyTrailDotNet
 
                 // Output the date and display text of the occurrence along with the person's name
                 Console.WriteLine($"{currentDate:MMMM d, yyyy}: {occurrence.DisplayText}");
+
+
+                milesTraveled += pace.Factor;
+                // Output the date and display text of the occurrence along with the person's name
+                Console.WriteLine($"Distance traveled: {milesTraveled} miles ({milesTraveled} km)");
+            
 
                 // Increment the date by one day
                 currentDate = currentDate.AddDays(1);
