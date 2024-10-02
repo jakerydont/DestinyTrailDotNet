@@ -1,10 +1,22 @@
 Occurrences:
-  - ID: "1"  # Changed from integer to string
+  - ID: "0"
+    DisplayText: ""
+    Probability: 1
+    Effect: ""
+  - ID: "1"  
     DisplayText: "{name} has a broken leg."
     Probability: 0.2
-  - ID: "2"  # Changed from integer to string
+    Effect: "Broken Leg"
+  - ID: "2" 
     DisplayText: "{name} lost the trail."
     Probability: 0.5
-  - ID: "3"  # Changed from integer to string
+    Effect: "Delay"
+  - ID: "3" 
     DisplayText: "{name} drank water with poo in it."
     Probability: 0.3
+    Effect: "Dysentery"
+  - ID: "4" 
+    DisplayText: "{name} was bitten by a snake."
+    Probability: 0.3
+    Effect: "Snakebite"
+
