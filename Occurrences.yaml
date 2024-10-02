@@ -1,0 +1,10 @@
+Occurrences:
+  - ID: "1"  # Changed from integer to string
+    DisplayText: "{name} has a broken leg."
+    Probability: 0.2
+  - ID: "2"  # Changed from integer to string
+    DisplayText: "{name} lost the trail."
+    Probability: 0.5
+  - ID: "3"  # Changed from integer to string
+    DisplayText: "{name} drank water with poo in it."
+    Probability: 0.3
