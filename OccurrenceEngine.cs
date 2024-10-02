@@ -54,8 +54,14 @@ namespace DestinyTrailDotNet
         public Occurrence ProcessOccurrence(Occurrence occurrence)
         {
             var person = GetRandomPerson();
-            // Replace the {name} token in the display text with the person's name
-            occurrence.DisplayText = occurrence.DisplayText.Replace("{name}", person.Name);
+
+            if (occurrence.DisplayText.Contains("{name}"))
+            {
+                occurrence.DisplayText = occurrence.DisplayText.Replace("{name}", person.Name);
+                person.Status = new Status { Name = occurrence.Effect }; 
+                //Console.WriteLine($"\n{person.Name}: {person.Status.Name}");
+            }
+
             return occurrence;
         }
 
