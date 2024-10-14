@@ -10,9 +10,9 @@ namespace DestinyTrailDotNet
     {
         private readonly Occurrence[] _occurrences;
         private readonly string[] _statuses;
-        private readonly Party _party ;
+        private readonly WagonParty _party ;
 
-        public OccurrenceEngine(string yamlFilePath,  Party party, string[] statuses )
+        public OccurrenceEngine(string yamlFilePath,  WagonParty party, string[] statuses )
         {
             _occurrences = LoadOccurrences(yamlFilePath);
             _statuses = statuses;
