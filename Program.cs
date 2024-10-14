@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 using System.Collections.Generic;
 using System.IO.Pipes;
+using System.Security;
 
 namespace DestinyTrailDotNet
 {
@@ -25,8 +26,8 @@ namespace DestinyTrailDotNet
             string[] statuses = Utility.LoadYaml<StatusData>(statusesFilePath).Statuses.ToArray();
             string[] randomNames = Utility.LoadYaml<RandomNamesData>(randomNamesPath).RandomNames.ToArray();
 
-            var party = new Party(randomNames);
-            
+            var party = new WagonParty(randomNames);
+            Console.WriteLine(party.GetNames());
 
             OccurrenceEngine occurrenceEngine = new OccurrenceEngine(occurrencesFilePath, party, statuses);
 
@@ -36,7 +37,7 @@ namespace DestinyTrailDotNet
 
 
             // Start with an initial date
-            DateTime currentDate = new DateTime(1850, 10, 1); // Start from October 1, 1850
+            DateTime currentDate = new DateTime(1860, 10, 1); // Start from October 1, 1850
 
             // Loop to pick a new random occurrence every 5 seconds
             while (true)
