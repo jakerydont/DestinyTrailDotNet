@@ -9,14 +9,14 @@ namespace DestinyTrailDotNet
     public class OccurrenceEngine
     {
         private readonly Occurrence[] _occurrences;
-        private readonly string[] _randomNames;
         private readonly string[] _statuses;
+        private readonly Party _party ;
 
-        public OccurrenceEngine(string yamlFilePath,  string[] randomNames, string[] statuses)
+        public OccurrenceEngine(string yamlFilePath,  Party party, string[] statuses )
         {
             _occurrences = LoadOccurrences(yamlFilePath);
-            _randomNames = randomNames;
             _statuses = statuses;
+            _party = party;
 
         }
 
@@ -53,7 +53,7 @@ namespace DestinyTrailDotNet
 
         public Occurrence ProcessOccurrence(Occurrence occurrence)
         {
-            var person = GetRandomPerson();
+            var person = _party.GetRandomMember();
 
             if (occurrence.DisplayText.Contains("{name}"))
             {
@@ -65,22 +65,7 @@ namespace DestinyTrailDotNet
             return occurrence;
         }
 
-        private Person GetRandomPerson()
-        {
-            Random random = new Random();
-            string id = Guid.NewGuid().ToString(); // Generate a unique ID
-            string name = _randomNames[random.Next(_randomNames.Length)]; // Pick a random name from the array
-            
-            // Pick a random status from the array and create a new Status object
-            var randomStatus = _statuses[random.Next(_statuses.Length)];
 
-            return new Person
-            {
-                ID = id,
-                Name = name,
-                Status = new Status { Name = randomStatus } // Assigning a strongly typed Status
-            };
-        }
 
     }
 }

@@ -19,4 +19,7 @@ Occurrences:
     DisplayText: "{name} was bitten by a snake."
     Probability: 0.3
     Effect: "Snakebite"
-
+  - ID: "5" 
+    DisplayText: "{name} was eaten by the cursed child."
+    Probability: 0.01
+    Effect: "Dead"
