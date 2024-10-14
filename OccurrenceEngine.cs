@@ -59,7 +59,7 @@ namespace DestinyTrailDotNet
             {
                 occurrence.DisplayText = occurrence.DisplayText.Replace("{name}", person.Name);
                 person.Status = new Status { Name = occurrence.Effect }; 
-                //Console.WriteLine($"\n{person.Name}: {person.Status.Name}");
+                //Display.Write($"\n{person.Name}: {person.Status.Name}");
             }
 
             return occurrence;

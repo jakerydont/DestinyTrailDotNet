@@ -17,7 +17,7 @@ namespace DestinyTrailDotNet {
             string[] randomNames = Utility.LoadYaml<RandomNamesData>(randomNamesPath).RandomNames.ToArray();
 
             var party = new WagonParty(randomNames);
-            Console.WriteLine(party.GetNames());
+            Display.Write(party.GetNames());
 
             OccurrenceEngine occurrenceEngine = new OccurrenceEngine(occurrencesFilePath, party, statuses);
 
@@ -32,7 +32,7 @@ namespace DestinyTrailDotNet {
             // Loop to pick a new random occurrence every 5 seconds
             while (true)
             {
-
+                Display.Clear();
 
                 // Pick a random occurrence based on probability
                 Occurrence randomOccurrence = occurrenceEngine.PickRandomOccurrence();
@@ -40,12 +40,12 @@ namespace DestinyTrailDotNet {
 
 
                 // Output the date and display text of the occurrence along with the person's name
-                Console.WriteLine($"\n{currentDate:MMMM d, yyyy}\n------\n{occurrence.DisplayText}");
+                Display.Write($"\n{currentDate:MMMM d, yyyy}\n------\n{occurrence.DisplayText}");
 
 
                 milesTraveled += pace.Factor;
                 // Output the date and display text of the occurrence along with the person's name
-                Console.WriteLine($"Distance traveled: {milesTraveled} miles ({milesTraveled} km)");
+                Display.Write($"Distance traveled: {milesTraveled} miles ({milesTraveled} km)");
             
 
                 // Increment the date by one day
